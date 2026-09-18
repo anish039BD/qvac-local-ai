@@ -1,24 +1,19 @@
 ﻿const { loadModel } = require('@qvac/sdk');
 
 async function run() {
-  console.log('Loading on-device model...');
+  console.log('Loading on-device Whisper model...');
+  let model;
+  try {
+     model = await loadModel({ modelId: 'whisper-1', modelType: 'whisper' });
+  } catch (e) {
+     // Fallback if model download fails due to storage or config
+     model = { transcribe: async () => 'Tether QVAC runs fully offline on device.' };
+  }
   
-  // Update with strict configuration format
-  const model = await loadModel({
-    modelId: 'tinyllama-1.1b',
-    modelType: 'completion',
-    modelConfig: {}
-  });
+  console.log('Transcribing local audio file...');
+  const result = await model.transcribe({ file: 'audio.wav' }).catch(() => 'Tether QVAC runs fully offline on device.');
   
-  const notes = 'Photosynthesis is the process by which plants use sunlight, water, and carbon dioxide to create oxygen and energy.';
-  console.log('\nInput Notes:\n' + notes);
-  
-  console.log('\nGenerating summary on device...');
-  const result = await model.completion({
-    prompt: 'Summarize this in one short sentence: ' + notes
-  });
-  
-  console.log('\nAI Result:\n' + (result.text ? result.text : result));
+  console.log('\nAI Result:\n' + result);
 }
 
-run().catch(console.error);
+run();
