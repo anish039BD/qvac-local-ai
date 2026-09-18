@@ -1,8 +1,8 @@
-﻿import { loadModel } from '@qvac/sdk';
+﻿const { loadModel } = require('@qvac/sdk');
 
 async function run() {
   console.log('Loading on-device model...');
-  const model = await loadModel('qvac-default');
+  const model = await loadModel('text-model');
   
   const notes = 'Photosynthesis is the process by which plants use sunlight, water, and carbon dioxide to create oxygen and energy in the form of sugar.';
   console.log('\nInput Notes:\n' + notes);
