@@ -1,12 +1,27 @@
 {
-  "name": "qvac-node-final",
+  "name": "qvac-local-video-transcriber",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple on-device video transcription app powered by Tether QVAC and Whisper.",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "check": "node --check index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "qvac",
+    "local-ai",
+    "whisper",
+    "transcription",
+    "speech-to-text",
+    "offline-ai"
+  ],
+  "author": "Anish Roy",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@qvac/sdk": "^0.19.1"
+  }
 }
